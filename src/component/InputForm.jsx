@@ -58,12 +58,12 @@ const handleReset = () => {
   return (
     <div className="flex">
       <div className="flex flex-col items-center">
-         <img alt="seal" src={logo} className="md:w-[70%] w-[35%] mr-[15vw]"/>         
+         <img alt="seal" src={logo} className="md:w-[50%] w-[35%] mr-[10vw]"/>         
          <span className="font-semibold">Little Seal's Recipe</span>
       </div>
 
 
- <div className="flex justify-center items-center">
+ <div className="flex justify-center items-left">
     <form className="lg:w-[50%] w-[35%]" onSubmit={handleSubmit}>
           Recipe Title :          
           <Input value={["Title", title, setTitle]} />        
@@ -124,7 +124,7 @@ const handleReset = () => {
                             }
                             </ul>
                         </div>
-                        <button onClick={() => handleDelete(element.id)} className="font-bold text-xl">x</button>
+                        <button onClick={() => handleDelete(element.id)} className="font-bold text-xl">DELETE</button>
                     </div>
                     );
                   })}
