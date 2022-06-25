@@ -1,4 +1,27 @@
+import {createAsyncThunk} from '@reduxjs/toolkit';
+import axios from 'axios';
 
+const POSTS_URL='https://localhost:3001/posts';
+const Http = new XMLHttpRequest();
+// JSON.stringify(data)
+
+export const fetchRecipes = createAsyncThunk('posts/fetchRecipes', async () => {
+    const response = await axios.get(POSTS_URL)
+    return response.data
+})
+
+axios.get(POSTS_URL)
+.then(res => {
+    console.log("123");
+    console.log(res.data);
+})
+.catch(err => {
+    console.log(err.response);
+})
+
+
+
+//actions
 export function addItem(recipe) {
     return {
         type: "ADD_ITEM",
@@ -50,18 +73,52 @@ const initialState=[
     }
 ]
 
-export default function recipesReducer(recipes=initialState, action){
+
+
+export default function recipesReducer(recipes=initialState, action){   
+    
     switch(action.type){
         case "ADD_ITEM": 
         {
-            const updatedRecipes = [...recipes, action.payload]
+            const updatedRecipes = [...recipes, action.payload] ;//action.payload is the new recipe append to the current recipe list
+
+            //send req to server            
+            //const url='https://localhost:3001/posts';
+            // Http.open("POST", POSTS_URL, action.payload);  //send new post to 3001
+            // Http.send();  //send request to url
+            
+            // Http.open("GET", POSTS_URL);  //get new post from 3001
+            // updatedRecipes = Http.send();  //send request to url, the format is not righr
+            //fetchRecipes;
+
             return updatedRecipes;
+            
         }
         case "DELETE_ITEM":{
             const updatedRecipes = recipes.filter(item => action.payload !== item.id)
+
+
+            //send req to server           
+            //const url='https://localhost:3001/posts';
+            // Http.open("DELETE", POSTS_URL, action.payload);  //send new post to 3001
+            // Http.send();  //send request to url
+
+            // Http.open("GET", POSTS_URL);  //get new post from 3001
+            //updatedRecipes = Http.send();  //send request to url, the format is not righr
+
+
             return updatedRecipes;
         }
         default: 
-            return recipes;
+
+            // Http.open("GET", POSTS_URL);  //get new post from 3001
+            // updatedRecipes = Http.send();  //send request to url, the format is not right, should json.stringerfy to list
+            return recipes; //don't use the initial data above
+            //return updatedRecipes;
+
+
     }
+    
 }
+
+export const selectAllPosts = (recipes) => recipes.posts.posts;

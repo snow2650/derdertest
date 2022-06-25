@@ -1,25 +1,45 @@
 var express = require('express');
 var router = express.Router();
 
+
+//const data= require('./initial.json');
+//var recipeList = JSON.parse('./initial.json');
+var fs =require("fs");
+
 /* GET users listing. */
+// router.get('/', function(req, res, next) {
+//   res.send('respond with a resource');
+// });
+
 router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
-});
+  //var user = JSON.parse(req.body)
+  // res.send('user info is ' + JSON.stringify(recipeList ))
+  var data = fs.readFileSync('./initial.json', 'utf-8');
+
+  console.log("data")
+  //res.send(data)
+  res.send('user info is ' + JSON.stringify(data))
+})
+
+// var server = router.listen(8081, function () {
+//   var host = server.address().address
+//   var port = server.address().port
+//   console.log("url is http://%s:%s", host, port)
+
+// })
+
 
 module.exports = router;
 
+// do this later, fix GET first
 
-router.get('/:userId', function (req, res, next) {
-  const foundUser = users.find(user => user.id === req.params.userId);
-  return res
-  .setHeader('Content-Type', 'application/json')
-  .send(users);
-  });
-  router.post('/', function (req, res, next) {
-  const user = { id: uuid(), name: req.body.name };
-  users.push(user);
-  return res
-  .setHeader('Content-Type', 'application/json')
-  .status(201)
-  .send(user);
-  })
+router.delete('/users', function(req, res, next) {
+  var user = JSON.parse(req.body)
+  res.send('user is deleted : ' + user.name)
+});
+
+// router.post('/posts', function(req, res, next) {
+//   res.send('respond with a resource');
+// });
+
+

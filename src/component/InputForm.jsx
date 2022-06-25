@@ -7,6 +7,25 @@ import HiddenPage from "./HiddenPage";
 import logo from './seal.jpg';
 import React from "react";
 
+import axios from "axios"
+import {createAsyncThunk} from '@reduxjs/toolkit';
+
+// const POSTS_URL='https://localhost:3001/posts';
+// const Http = new XMLHttpRequest();
+
+// export const fetchRecipes = createAsyncThunk('posts/fetchRecipes', async () => {
+//     const response = await axios.get(POSTS_URL)
+//     return response.data
+// })
+
+// axios.get(POSTS_URL)
+// .then(res => {
+//     console.log(res.recipes);
+// })
+// .catch(err => {
+//     console.log(err.response);
+// })
+
 var currentID = 2;
 const InputForm = () => {
 
@@ -61,7 +80,6 @@ const handleReset = () => {
          <img alt="seal" src={logo} className="md:w-[50%] w-[35%] mr-[10vw]"/>         
          <span className="font-semibold">Little Seal's Recipe</span>
       </div>
-
 
  <div className="flex justify-center items-left">
     <form className="lg:w-[50%] w-[35%]" onSubmit={handleSubmit}>

@@ -1,5 +1,6 @@
 [
-    {"title": "Udon Soup",
+    {
+    "title": "Udon Soup 1",
     "ingredients": [
         "5 cups water",
         "5 teaspoons instant dashi granules",
@@ -16,7 +17,7 @@
     "id": 1
     },
     {
-        "title": "Teriyaki Chicken",
+        "title": "Teriyaki Chicken 2",
         "ingredients":[
             "4 chicken thighs", 
             "1 tablespoon sesame or vegetable oil",

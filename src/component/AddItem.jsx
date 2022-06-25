@@ -24,27 +24,22 @@ const AddItem = () => {
             instructions: instructionsList
         }
         dispatch(addItem(newRecipe));
+        const json = JSON.stringify(Object.fromEntries(newRecipe))
+        console.log(json)
+
+        // const response = await fetch('/api/data', {
+        //     method: 'POST',
+        //     headers: {
+        //       'Content-Type': 'application/json',
+        //     },
+        //     body: JSON.stringify({ post: this.state.post }),
+        //   });
+        //   const body = await response.text();
+          
+        //   this.setState({ responseToPost: body });
+        
     }
     
-
-    // const [listIngredients, setListIngredients] = useState([{
-    //     ingredient: '',
-    // }]);
-
-    // const addListIngredients = () => {
-    //     setListIngredients(
-    //         [...listIngredients, {
-    //             ingredient: ''
-    //         }]
-    //     )
-    // }
-
-    // const removeListIngredients = (index) => {
-    //     const rows = [...listIngredients];
-    //     rows.splice(index, 1);
-    //     setListIngredients(rows);
-    // }
-
 
     return (
         <div className="flex flex-col">
