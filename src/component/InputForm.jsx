@@ -10,13 +10,13 @@ import React from "react";
 import axios from "axios"
 import {createAsyncThunk} from '@reduxjs/toolkit';
 
-// const POSTS_URL='https://localhost:3001/posts';
-// const Http = new XMLHttpRequest();
+ const POSTS_URL='https://localhost:3001/posts';
+ const Http = new XMLHttpRequest();
 
-// export const fetchRecipes = createAsyncThunk('posts/fetchRecipes', async () => {
-//     const response = await axios.get(POSTS_URL)
-//     return response.data
-// })
+export const fetchRecipes = createAsyncThunk('posts/fetchRecipes', async () => {
+    const response = await axios.get(POSTS_URL)
+    return response.data
+})
 
 // axios.get(POSTS_URL)
 // .then(res => {

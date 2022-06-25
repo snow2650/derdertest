@@ -1,23 +1,37 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import axios from 'axios';
 
-const POSTS_URL='https://localhost:3001/posts';
+const POSTS_URL='https://localhost:3001/'
+/*
+const POSTS_URL='https://localhost:3001/';
 const Http = new XMLHttpRequest();
-// JSON.stringify(data)
 
 export const fetchRecipes = createAsyncThunk('posts/fetchRecipes', async () => {
     const response = await axios.get(POSTS_URL)
+    console.log(data);
     return response.data
 })
 
+
+
 axios.get(POSTS_URL)
 .then(res => {
-    console.log("123");
+    
     console.log(res.data);
 })
 .catch(err => {
     console.log(err.response);
 })
+
+
+*/
+
+axios
+  .get('http://localhost:3001/users')
+  .then(response => {
+    const notes = response.data
+    console.log(notes)
+  })
 
 
 
@@ -36,7 +50,8 @@ export function deleteItem(nameOfTheRecipe){
     }
 }
 
-const initialState=[
+const initialState=
+[
     {
     "title": "Udon Soup",
     "ingredients": [
@@ -75,11 +90,12 @@ const initialState=[
 
 
 
-export default function recipesReducer(recipes=initialState, action){   
+export default function recipesReducer(recipes= initialState, action){   
     
     switch(action.type){
         case "ADD_ITEM": 
         {
+            //recipes=
             const updatedRecipes = [...recipes, action.payload] ;//action.payload is the new recipe append to the current recipe list
 
             //send req to server            
@@ -90,6 +106,9 @@ export default function recipesReducer(recipes=initialState, action){
             // Http.open("GET", POSTS_URL);  //get new post from 3001
             // updatedRecipes = Http.send();  //send request to url, the format is not righr
             //fetchRecipes;
+            axios.get(POSTS_URL).then(res => {
+                console.log(res.data);
+            }).catch(err => {console.log(err.response);})
 
             return updatedRecipes;
             

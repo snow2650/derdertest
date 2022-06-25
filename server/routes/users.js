@@ -4,7 +4,7 @@ var router = express.Router();
 
 //const data= require('./initial.json');
 //var recipeList = JSON.parse('./initial.json');
-var fs =require("fs");
+var fs = require("fs");
 
 /* GET users listing. */
 // router.get('/', function(req, res, next) {
@@ -12,13 +12,8 @@ var fs =require("fs");
 // });
 
 router.get('/', function(req, res, next) {
-  //var user = JSON.parse(req.body)
-  // res.send('user info is ' + JSON.stringify(recipeList ))
   var data = fs.readFileSync('./initial.json', 'utf-8');
-
-  console.log("data")
-  //res.send(data)
-  res.send('user info is ' + JSON.stringify(data))
+  res.send('user info is ' + JSON.parse(data)[0].title)
 })
 
 // var server = router.listen(8081, function () {
