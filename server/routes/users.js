@@ -1,40 +1,28 @@
 var express = require('express');
 var router = express.Router();
-
-
-//const data= require('./initial.json');
-//var recipeList = JSON.parse('./initial.json');
 var fs = require("fs");
-
-/* GET users listing. */
-// router.get('/', function(req, res, next) {
-//   res.send('respond with a resource');
-// });
+var data = JSON.parse(fs.readFileSync('./initial.json', 'utf-8'));
 
 router.get('/', function(req, res, next) {
-  var data = fs.readFileSync('./initial.json', 'utf-8');
-  res.send('user info is ' + JSON.parse(data)[0].title)
+  res.send(data)
 })
-
-// var server = router.listen(8081, function () {
-//   var host = server.address().address
-//   var port = server.address().port
-//   console.log("url is http://%s:%s", host, port)
-
-// })
-
 
 module.exports = router;
 
-// do this later, fix GET first
-
-router.delete('/users', function(req, res, next) {
-  var user = JSON.parse(req.body)
-  res.send('user is deleted : ' + user.name)
+router.delete('/', function(req, res, next) {
+  /* console.log(" users delete")
+  console.log("req.body = ", req.body)
+  console.log("users delete end")*/
+  const deletedData = data.findIndex(p => p.id == req.body)
+  data.splice(deletedData, 1)
+  res.send(data)
 });
 
-// router.post('/posts', function(req, res, next) {
-//   res.send('respond with a resource');
-// });
 
-
+router.post('/', function(req, res, next) {
+  data.push(req.body) 
+  /* console.log("users post")
+  console.log("req.body = ", req.body)
+  console.log("users post end")*/
+  res.send(data)       //req.body=>data
+});
