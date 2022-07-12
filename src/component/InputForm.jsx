@@ -7,13 +7,24 @@ import logo from './seal.jpg';
 import React from "react";
 import axios from "axios"
 import {createAsyncThunk} from '@reduxjs/toolkit';
+//import run from "./run";
 
 const POSTS_URL = 'http://localhost:3001/users';    //??
+//const POSTS_URL = 'http://localhost:27017/seal.recipes';
+
+ //const { MongoClient } = require("mongodb");
+// let uri = "mongodb+srv://m001-student:m001-mongodb-basics@sandbox.2vat0.mongodb.net/?retryWrites=true&w=majority";
+// const client = new MongoClient(uri);
 
 export const fetchRecipes = createAsyncThunk('posts/fetchRecipes', async () => {
-    const response = await axios.get(POSTS_URL)
+    const response = await axios.get(POSTS_URL)    
     return response.data
+
+    //return run();
+    
 })
+
+
 
 
 var currentID = 2;
