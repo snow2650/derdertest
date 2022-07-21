@@ -26,32 +26,3 @@ router.post('/', function(req, res, next) {
   console.log("users post end")*/
   res.send(data)       //req.body=>data
 });
-
-// const mongoose    = require("mongoose");
-// const express     = require("express");
-// const bodyParser  = require("body-parser");
-
-// //const db          = require('./config/db');
-
-// const Recipe        = require('./models/book');
-
-// const app         = express();
-
-// app.use(bodyParser.urlencoded({extended: true}));
-
-// app.route('/')
-//     .get((req, res) => {
-//         Recipe.find({}).then(docs => res.json(docs))
-//     })
-//     // .post((req, res) => {
-//     //     let b = new Book({
-//     //         title: req.body.title,
-//     //         author: req.body.author,
-//     //         genre: req.body.genre
-//     //     })
-
-//     //     b.save()
-//     //         .then(doc => console.log(doc))
-//     //         .catch(err => console.error(err))
-//     //     res.json(req.body)
-//     // })

@@ -1,31 +1,11 @@
 import { useSelector,useDispatch } from "react-redux";
 import { useState } from "react";
-import { deleteRecipe, addRecipe, getRecipe } from "../Redux/recipe";
+import { fetchRecipes,addRecipe,deleteRecipe, editRecipe} from "../Redux/recipe";
 import Input from "./Input";
 import HiddenPage from "./HiddenPage";
 import logo from './seal.jpg';
 import React from "react";
-import axios from "axios"
-import {createAsyncThunk} from '@reduxjs/toolkit';
-//import run from "./run";
-
-const POSTS_URL = 'http://localhost:3001/users';    //??
-//const POSTS_URL = 'http://localhost:27017/seal.recipes';
-
- //const { MongoClient } = require("mongodb");
-// let uri = "mongodb+srv://m001-student:m001-mongodb-basics@sandbox.2vat0.mongodb.net/?retryWrites=true&w=majority";
-// const client = new MongoClient(uri);
-
-export const fetchRecipes = createAsyncThunk('posts/fetchRecipes', async () => {
-    const response = await axios.get(POSTS_URL)    
-    return response.data
-
-    //return run();
-    
-})
-
-
-
+import axios from "axios";
 
 var currentID = 2;
 const InputForm = () => {
@@ -36,13 +16,14 @@ const InputForm = () => {
   const [instructions, setInstructions] = useState('');
   const [isOpen, setIsOpen] = useState(false);
   const [id, setId] = useState(0);
+  const [time, setTime] = useState(10);
+  const [newIngredients,setNewIn] =useState('');
+
   const openPopup = (e, id) => {
     setIsOpen(!isOpen);
     console.log(id);
     setId(id);
   }
-
-  //dispatch(fetchRecipes());
 
   const handleSubmit =(e) => {
     e.preventDefault();  //call axios
@@ -52,20 +33,32 @@ const InputForm = () => {
       title: title,
       ingredients: [ingredients],
       instructions: [instructions],
+      time: time,
       id:currentID
     }
     dispatch(addRecipe(newRecipe));
-    //dispatch(fetchRecipes());
   }
 
-  const handleDelete = (id) => {
-    dispatch(deleteRecipe(id));
+  const handleDelete = (_id) => {
+    dispatch(deleteRecipe(_id));
   }
 
   const handleReset = () => {
-    setTitle('')
+    setTitle('');
     setIngredients('');
     setInstructions('');
+    setTime('')
+  }
+
+  const handleEdit = (_id) => {
+    //e.preventDefault();  //call axios
+    //dispatch(editRecipe());  //call edit here!!
+    
+    const updatedRecipe = {
+      newIngredients: [newIngredients],
+      id: _id  
+    }
+    dispatch(editRecipe(updatedRecipe));
   }
 
   return (
@@ -83,7 +76,10 @@ const InputForm = () => {
             Ingredients :          
             <Input value={["Ingredients", ingredients, setIngredients]} />        
             Instructions :          
-            <Input value={["Instructions", instructions, setInstructions]} /> 
+            <Input value={["Instructions", instructions, setInstructions]} />
+            Completion Time in minutes: 
+            <Input value={["Completion Time", time, setTime]} />
+
             <div className="flex justify-between">
               <button type="reset" onClick={handleReset} >
                 Clear
@@ -118,8 +114,20 @@ const InputForm = () => {
                     <li className="text-gray-700 text-base">
                     {instructionItem} </li>)} 
                   </ul>
+                  <div className="font-normal">Completion Time</div>
+                  <ul className="list-disc p-4"> {
+                    element.time} 
+                  </ul>
                 </div>
-                <button onClick={() => handleDelete(element.id)} className="font-bold text-xl">DELETE </button>
+                <button onClick={() => handleDelete(element._id)} className="font-bold text-xl"> DELETE </button>
+                <div>
+                
+                <Input 
+                type="text" 
+                value={["New Ingredients", newIngredients, setNewIn]}></Input>
+                
+                <button onClick={() => handleEdit(element._id)}> Edit Ingredients </button>
+                </div>
               </div>
             );})}
         </div>

@@ -14,6 +14,7 @@
         "Add in dashi granules to the water.",
         "Divide noodles and garnish with green onions and seven-spice."
     ],
+    "time" :15,
     "id": 1
     },
     {
@@ -31,6 +32,7 @@
             "Pour the teriyaki sauce into the pan and bring to a boil over medium-high heat.", 
             "Serve over rice or noodles."
         ],
+        "time" :20,
         "id": 2
     }
 ]
