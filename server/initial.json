@@ -1,21 +1,6 @@
-
-export function addItem(recipe) {
-    return {
-        type: "ADD_ITEM",
-        payload: recipe
-    }
-}
-
-export function deleteItem(nameOfTheRecipe){
-    return {
-        type: "DELETE_ITEM", 
-        payload: nameOfTheRecipe
-    }
-}
-
-const initialState=[
+[
     {
-    "title": "Udon Soup",
+    "title": "Udon Soup 1",
     "ingredients": [
         "5 cups water",
         "5 teaspoons instant dashi granules",
@@ -29,10 +14,11 @@ const initialState=[
         "Add in dashi granules to the water.",
         "Divide noodles and garnish with green onions and seven-spice."
     ],
+    "time" :15,
     "id": 1
     },
     {
-        "title": "Teriyaki Chicken",
+        "title": "Teriyaki Chicken 2",
         "ingredients":[
             "4 chicken thighs", 
             "1 tablespoon sesame or vegetable oil",
@@ -46,22 +32,8 @@ const initialState=[
             "Pour the teriyaki sauce into the pan and bring to a boil over medium-high heat.", 
             "Serve over rice or noodles."
         ],
+        "time" :20,
         "id": 2
     }
 ]
 
-export default function recipesReducer(recipes=initialState, action){
-    switch(action.type){
-        case "ADD_ITEM": 
-        {
-            const updatedRecipes = [...recipes, action.payload]
-            return updatedRecipes;
-        }
-        case "DELETE_ITEM":{
-            const updatedRecipes = recipes.filter(item => action.payload !== item.id)
-            return updatedRecipes;
-        }
-        default: 
-            return recipes;
-    }
-}

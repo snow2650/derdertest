@@ -10,6 +10,7 @@ const AddItem = () => {
     const [title, setTitle] = useState('');
     const [ingredients, setIngredients] = useState('');
     const [instructions, setInstructions] = useState('');
+    const [time, setTime] = useState(10);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -18,33 +19,30 @@ const AddItem = () => {
         // console.log("instructions", instructions);
         const ingredientsList = ingredients;
         const instructionsList = instructions;
+        const time = time;
         const newRecipe = {
             title: title, 
             ingredients: ingredientsList,
-            instructions: instructionsList
+            instructions: instructionsList,
+            time: time
         }
         dispatch(addItem(newRecipe));
+        const json = JSON.stringify(Object.fromEntries(newRecipe))
+        console.log(json)
+
+        // const response = await fetch('/api/data', {
+        //     method: 'POST',
+        //     headers: {
+        //       'Content-Type': 'application/json',
+        //     },
+        //     body: JSON.stringify({ post: this.state.post }),
+        //   });
+        //   const body = await response.text();
+          
+        //   this.setState({ responseToPost: body });
+        
     }
     
-
-    // const [listIngredients, setListIngredients] = useState([{
-    //     ingredient: '',
-    // }]);
-
-    // const addListIngredients = () => {
-    //     setListIngredients(
-    //         [...listIngredients, {
-    //             ingredient: ''
-    //         }]
-    //     )
-    // }
-
-    // const removeListIngredients = (index) => {
-    //     const rows = [...listIngredients];
-    //     rows.splice(index, 1);
-    //     setListIngredients(rows);
-    // }
-
 
     return (
         <div className="flex flex-col">
@@ -86,6 +84,18 @@ const AddItem = () => {
                         placeholder="Instructions" 
                         value={instructions}
                         onChange={(e)=> {setInstructions(e.target.value)}} />
+                    </div>
+                    <div className="mb-4">
+                        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="instructions">
+                            Completion Time in minutes
+                        </label>
+                        <input 
+                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
+                        id="name" 
+                        type="text" 
+                        placeholder="10" 
+                        value={instructions}
+                        onChange={(e)=> {setTime(e.target.value)}} />
                     </div>     
                     {/* <!-- <button type="submit"><a href="index.html">Submit</a></button> --> */}
                     <button type="submit">Submit</button>
