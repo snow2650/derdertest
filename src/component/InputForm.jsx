@@ -65,6 +65,7 @@ const InputForm = () => {
     <div className="flex">
       <div className="flex flex-col items-center">   
         <img alt="seal" src={logo} className="md:w-[50%] w-[35%] mr-[10vw]"/> 
+        <img alt="seal" src={logo} className="md:w-[50%] w-[35%] mr-[10vw]"/> 
       </div>        
       <div className="flex flex-col items-center">        
         <span className="font-semibold">Little Seal's Recipe</span>
